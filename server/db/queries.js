@@ -23,5 +23,17 @@ module.exports = {
         res.send(data);
       }
     });
+  },
+
+  getPokemonOfType: (type, callback) => {
+    let qString = `SELECT p.name, t.type, i.img FROM pokemon p INNER JOIN types t ON p.typeNum = t.id INNER JOIN images i ON p.imageNum = i.id WHERE t.type LIKE "${type}" AND p.typeNum = t.id AND p.imageNum = i.id;`
+
+    db.query(qString, (err, data) => {
+      if (err) {
+        callback (err, null);
+      } else {
+        callback (null, data);
+      }
+    });
   }
 }

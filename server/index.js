@@ -21,3 +21,13 @@ app.get('/api/pokedex', (req, res) => {
 app.get('/api/pokedex/types', (req, res) => {
   queries.getTypes(req, res);
 });
+
+app.get('/api/pokedex/types/:type', (req, res) => {
+  queries.getPokemonOfType(req.params.type, (err, data) => {
+    if (err) {
+      console.log('Error getting type: ', err);
+    } else {
+      res.send(data);
+    }
+  });
+})
