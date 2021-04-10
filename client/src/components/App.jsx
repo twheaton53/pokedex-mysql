@@ -1,24 +1,33 @@
 import React from 'react';
 import axios from 'axios';
 import PokemonList from './PokemonList.jsx';
+import TypesList from './TypesList.jsx';
 
 class App extends React.Component {
   constructor(props){
     super(props)
 
     this.state = {
-      pokemon: []
+      pokemon: [],
+      types: []
     }
 
   }
 
   componentDidMount() {
     axios.get('/api/pokedex')
-      .then((result) => {
-        console.log(result);
+      .then((pokemonResult) => {
         this.setState({
-          pokemon: result.data
+          pokemon: pokemonResult.data,
         });
+      })
+      .then(() => {
+        return axios.get('/api/pokedex/types')
+      })
+      .then((typesResult) => {
+        this.setState({
+          types: typesResult.data
+        }, () => console.log(this.state.types))
       })
       .catch((err) => {
         console.log('Error in componentDidMount ', err);
@@ -32,9 +41,7 @@ class App extends React.Component {
         <button>Show All</button>
         <select id="types">
           <option>Sort by Type</option>
-          <option>Grass</option>
-          <option>Fire</option>
-          <option>Water</option>
+          <TypesList types={this.state.types} />
         </select>
         <div>
           <PokemonList pokemons={this.state.pokemon} />

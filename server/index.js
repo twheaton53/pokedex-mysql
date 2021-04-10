@@ -17,3 +17,7 @@ app.listen(port, () => {
 app.get('/api/pokedex', (req, res) => {
   queries.get(req, res);
 });
+
+app.get('/api/pokedex/types', (req, res) => {
+  queries.getTypes(req, res);
+});

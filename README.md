@@ -33,7 +33,7 @@ Implement the functionality detailed in the following steps:
 ###  Step 3
 
 - Create a `GET` route to display all the Pokemon in your database onto the page. You should render each Pokemon's name, type, and image.
-
+  DONE
 - Refactor the hardcoded `select` dropdown menu to display all of the types stored in the database.
 
 - Filter the displayed Pokemon to match the type selected in the dropdown menu.

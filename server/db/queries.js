@@ -13,5 +13,15 @@ module.exports = {
         res.send(data);
       }
     });
+  },
+
+  getTypes: (req, res) => {
+    db.query(`SELECT * FROM types`, (err, data) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.send(data);
+      }
+    });
   }
 }
