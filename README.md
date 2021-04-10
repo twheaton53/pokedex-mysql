@@ -11,10 +11,11 @@ Implement the functionality detailed in the following steps:
 ###  Step 1
 
 - Build out an express server to serve the front end.
-
+    DONE
 - Create a script for starting the server and for `webpack`.
-
+    DONE
 - Refactor your client to dynamically render from your React files.
+    DONE
 
 > You will know if you have done this correctly if you see Bulbasaur, Ivysaur, and Venasaur on the page.
 
@@ -23,8 +24,9 @@ Implement the functionality detailed in the following steps:
 ###  Step 2
 
 - Using `mysql`, build out the back-end. Use `schema.sql` to create and seed the "pokedex" database.
-
+  DONE
 - Establish a database connection in `db/index.js`
+  DONE
 
 ----
 
