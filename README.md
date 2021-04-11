@@ -46,8 +46,10 @@ Implement the functionality detailed in the following steps:
 ###  Step 4
 
 - On click of the Pokemon's name, enable editing through an input field. On 'submit', your component should re-render so the updated name is displayed.
+  DONE
 
 - Create a delete button to delete a Pokemon. On click of the delete button, the Pokemon should be removed from the page.
+  DONE
 
 ----
 

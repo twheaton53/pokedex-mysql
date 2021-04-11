@@ -9,12 +9,14 @@ class PokemonView extends React.Component {
       img: props.pokemon.img,
       type: props.pokemon.type,
       newName: '',
-      showNameForm: false
+      showNameForm: false,
+      delete: false
     }
 
     this.changeName = this.changeName.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   changeName() {
@@ -27,6 +29,12 @@ class PokemonView extends React.Component {
     this.setState({
       [e.target.name] : e.target.value
     }, () => {console.log(this.state.newName)});
+  }
+
+  handleDelete() {
+    this.setState({
+      delete: true
+    });
   }
 
   handleNameChange(e) {
@@ -59,10 +67,27 @@ class PokemonView extends React.Component {
         <h3 onClick={this.changeName}>{this.state.name}</h3>
         <img src={this.state.img} />
         <p>{this.state.type}</p>
+        <form onSubmit={this.handleDelete}>
+          <label>
+            Delete Pokemon
+          </label>
+          <input type="submit" value="Delete" />
+        </form>
       </div>
     );
 
-    return this.state.showNameForm ? updateNameForm : mainPage;
+    const deleted = (
+      <div></div>
+    );
+    // return this.state.showNameForm ? updateNameForm : mainPage;
+    if (this.state.delete) {
+      return deleted;
+    }
+    if (this.state.showNameForm) {
+      return updatedNameForm
+    } else {
+      return mainPage
+    }
   }
 }
 
