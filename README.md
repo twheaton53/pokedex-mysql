@@ -55,4 +55,4 @@ Implement the functionality detailed in the following steps:
 
 ###  Stretch Goal
 
-- Implement an 'Insert' button and corresponding `POST` route so you can add a Pokemon to the list.
+- Implement an 'Insert' button and corresponding `POST` route so you can add a Pokemon to the list. DONE
