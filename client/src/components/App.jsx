@@ -10,11 +10,16 @@ class App extends React.Component {
     this.state = {
       pokemon: [],
       types: [],
-      typeValue: ''
+      typeValue: '',
+      newName: '',
+      newType: '',
+      newImg: ''
     }
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleTypeSearch = this.handleTypeSearch.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -30,14 +35,14 @@ class App extends React.Component {
       .then((typesResult) => {
         this.setState({
           types: typesResult.data
-        }, () => console.log(this.state.types))
+        });
       })
       .catch((err) => {
         console.log('Error in componentDidMount ', err);
       });
   }
 
-  handleChange(e) {
+  handleTypeSearch(e) {
     let type = e.target.value;
     this.setState({
       typeValue: type
@@ -70,15 +75,60 @@ class App extends React.Component {
       });
   }
 
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let type = this.state.newType;
+    axios.get(`/api/pokedex/type/${type}`)
+      .then((response) => {
+        let newPokeObj = {
+          name: this.state.newName,
+          type: response.data[0].id,
+          img: this.state.newImg
+        };
+        debugger;
+        console.log(newPokeObj);
+        return axios.post(`/api/pokedex`, newPokeObj);
+      })
+      .then((result) => {
+        return axios.get(`/api/pokedex`)
+      })
+      .then((getResult) => {
+        this.setState({
+          pokemon: getResult.data
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div>
         <h1>Fullstack Pokedex!</h1>
         <button onClick={this.handleClick}>Show All</button>
-        <select id="types" value={this.state.typeValue} onChange={this.handleChange}>
+        <select id="types" value={this.state.typeValue} onChange={this.handleTypeSearch}>
           <option>Sort by Type</option>
           <TypesList types={this.state.types} />
         </select>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Insert a new Pokemon!
+          </label>
+            <label>Name</label>
+              <input type="text" name="newName" value={this.state.newName} onChange={this.handleChange} />
+            <label>Type</label>
+              <input type="text" name="newType" value={this.state.newType} onChange={this.handleChange} />
+            <label>Image Url</label>
+              <input type="text" name="newImg" value={this.state.newImg} onChange={this.handleChange} />
+              <input type="submit" value="Submit" />
+        </form>
         <div>
           <PokemonList pokemons={this.state.pokemon} />
         </div>

@@ -84,9 +84,9 @@ class PokemonView extends React.Component {
       return deleted;
     }
     if (this.state.showNameForm) {
-      return updatedNameForm
+      return updateNameForm;
     } else {
-      return mainPage
+      return mainPage;
     }
   }
 }
