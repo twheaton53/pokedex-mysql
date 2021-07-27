@@ -14,18 +14,22 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
+// Get all pokemon
 app.get('/api/pokedex', (req, res) => {
   queries.get(req, res);
 });
 
+// Get all types of pokemon
 app.get('/api/pokedex/types', (req, res) => {
   queries.getTypes(req, res);
 });
 
+// Get a specific type
 app.get('/api/pokedex/type/:type', (req, res) => {
   queries.getType(req.params.type, res);
 });
 
+// Get pokemon of a specific type
 app.get('/api/pokedex/types/:type', (req, res) => {
   queries.getPokemonOfType(req.params.type, (err, data) => {
     if (err) {
@@ -36,6 +40,7 @@ app.get('/api/pokedex/types/:type', (req, res) => {
   });
 })
 
+// Add a pokemon
 app.post('/api/pokedex', (req, res) => {
   queries.postPokemon(req, res, (err, result) => {
     res.send(result);
